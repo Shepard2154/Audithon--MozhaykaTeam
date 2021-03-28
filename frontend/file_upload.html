@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Best proj</title>
+
+    <!-- Подключаем Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <!-- MD icons -->
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <!-- Vuetify css -->
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+</head>
+
+
+<body>
+  <div id="app">
+        <input class="form-control-file" type="file" id="files" ref="files" multiple v-on:change="handleFileUploads()"/>
+        <button class="btn btn-primary" v-on:click="submitFiles()">Отправить</button>
+  </div>
+</body>
+
+
+<!-- Подключаем ajax-запросы axios -->
+<script src="https://unpkg.com/axios@0.20.0/dist/axios.min.js"></script>
+<!-- Vue 2 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<!-- Vuetify -->
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script>
+    Vue.options.delimiters = ['[[', ']]'];
+
+    let app = new Vue({
+        el: '#app',
+        
+        vuetify: new Vuetify(),
+
+        data: {
+            file: null
+        },
+
+        methods: {
+            handleFileUploads() {
+                this.file = this.$refs.files.files[0]
+            },
+
+            submitFiles() {
+                const data = new  FormData()
+                data.append(`file`, this.file)
+                axios({
+                    url: `http://18.191.32.36/file/upload/`,
+                    method: 'POST',
+                    data: data,
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Content-Disposition': `attachment; filename=example.txt`
+                    }
+                }).then((response) => {
+                    this.file = null
+                })
+            }
+        }
+    })
+ </script>
+
+<!-- Bootstrap js -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</html>

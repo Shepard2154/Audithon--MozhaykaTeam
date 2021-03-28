@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+    height: 100%;
+}
+
+#app {
+    background: url('../../assets/img/IMG_4461.png') no-repeat center center fixed !important;
+    background-size: cover;
+  }
