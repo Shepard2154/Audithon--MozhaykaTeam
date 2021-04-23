@@ -3,7 +3,6 @@ __pycache__
 *.egg-info
 venv
 .env
-*.json
 000*.py
 
 .DS_Store

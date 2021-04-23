@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    backendUrl: "http://3.138.107.33",
+    backendUrl: "http://18.191.16.194",
     token: null,
     jwtToken: null,
     refreshToken: null,

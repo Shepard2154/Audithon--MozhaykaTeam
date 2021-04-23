@@ -15,7 +15,7 @@ const routes = [
     name: 'signup'
   },
   {
-    path: '/debt',
+    path: '',
     name: 'main',
     component: () => import('../views/Main.vue')
   },
